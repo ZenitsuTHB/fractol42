@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 19:53:24 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/11 21:05:16 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/12 18:46:47 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,15 @@
 # define ARROW_DOWN 125
 # define ARROW_RIGHT 124
 
-#define	WRONG_SET "Unrecognized set ! try one of these combs :\n./fractol julia"
-#define	CORRECT_SET "./fractol mandelbrot\n./fratol burningship"
-#define	JULIA_SET "Within julia try some combos from -2.0 to 2.0"
+#define	WRONG_SET "Incomplete set ! try one of these combs :\n\t./fractol julia"
+#define	CORRECT_SET "\t./fractol mandelbrot\n\t./fratol burningship"
+#define	JULIA_SET "\tWithin julia try some combs from [-2.0 to 2.0]"
+
+typedef struct s_complex
+{
+	double	x;
+	double	y;
+}t_complex;
 
 typedef struct s_fract
 {
@@ -54,7 +60,7 @@ typedef struct s_fract
 void    printer(t_fract *data, int color);
 void    julia_set(t_fract *fract, float x, float y);
 void    burning_set(t_fract *fract);
-void    mandelbrot_set(t_fract *fract);
+void    mandelbrot_set(t_fract *fract, float x, float y);
 void	init_struct(t_fract *fract, char **av);
 
 #endif

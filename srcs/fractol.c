@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 12:00:38 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/11 21:05:20 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/12 20:00:26 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,12 @@ static int	print_to_screen(t_fract *fract)
 		while (fract->y++ < HEIGHT)
 		{
 			printer(fract, 32);
-			julia_set(fract, fract->x - WIDTH / 2, fract->y - HEIGHT / 2);
+			if(!ft_strncmp(fract->name, "julia", 5))
+				julia_set(fract, fract->x - WIDTH / 2, fract->y - HEIGHT / 2);
+			//else if(!ft_strncmp(fract->name, "mandelbrot", 5))
+			//	mandelbrot_set(fract, fract->x - WIDTH / 2, fract->y - HEIGHT / 2);
+			//if(!ft_strncmp(fract->name, julia, 5))
+			//	julia_set(fract, fract->x - WIDTH / 2, fract->y - HEIGHT / 2);
 		}
 	}
 	mlx_put_image_to_window(fract->mlx, fract->wind, fract->img, 0, 0);

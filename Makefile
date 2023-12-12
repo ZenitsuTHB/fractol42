@@ -6,7 +6,7 @@
 #    By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 17:44:46 by avolcy            #+#    #+#              #
-#    Updated: 2023/12/11 16:11:47 by avolcy           ###   ########.fr        #
+#    Updated: 2023/12/12 20:03:59 by avolcy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ OBJD = .temp/
 #___________________________#
 
 #========|_SCRS_|===========#
-SRC = $(SRCD)fractol.c $(SRCD)initializing.c $(SRCD)julia.c
+SRC = $(SRCD)fractol.c $(SRCD)initializing.c $(SRCD)julia.c $(SRCD)mandelbrot.c
 
 
 OBJ = $(addprefix $(OBJD), $(SRC:$(SRCD)%.c=%.o))
@@ -43,19 +43,19 @@ all : $(EXEC)
 	@mkdir -p .temp
 #________________________#
 $(LIBFT):
-	@$(MAKE) -C $(LIBDIR) $(SIL)
+	@$(MAKE) -C $(LIBDIR) --no-print-directory
 
 $(MLX) :
-	@$(MAKE) -C $(MLXDIR) $(SIL)
+	@$(MAKE) -C $(MLXDIR) --no-print-directory
 #-----------------------------#
 
-$(OBJD)%.o: $(SRCD)%.c | .temp #$(SRC) 
+$(OBJD)%.o: $(SRCD)%.c $(INC) | .temp #$(SRC) 
 	$(CC) $(FLAG) -c -o $@ $< 
 #========================================#
 $(EXEC) : $(NAME) $(LIBFT) $(MLX) 
 	$(CC) $(MLXFLAG) $^ -o $@
 
-$(NAME) : $(OBJ) $(INC) Makefile 
+$(NAME) : $(OBJ) $(INC) Makefile  
 	$(BUILT_LIB) $@ $^
 #----------------------------------------#
 
@@ -63,15 +63,16 @@ $(NAME) : $(OBJ) $(INC) Makefile
 
 #==========|_CLEAN_UP_|========#
 clean :
-	@$(MAKE) clean -C $(LIBDIR)
-	@$(MAKE) clean -C $(MLXDIR)
+	@$(MAKE) clean -C $(LIBDIR) --no-print-directory
+	@$(MAKE) clean -C $(MLXDIR) --no-print-directory
 	@$(RM) $(OBJD) 
 
 fclean : clean 
 	@$(RM) $(OBJD) 
 	@$(RM) $(EXEC) $(NAME) 
-	@$(MAKE) fclean -C $(LIBDIR)
-	@$(MAKE) fclean -C $(LIBDIR)
+	@$(MAKE) fclean -C $(LIBDIR) --no-print-directory
+	#@$(MAKE) fclean -C $(LIBDIR) --no-print-directory
+
 
 re : fclean all
 #-----------------------------------------------------#
@@ -86,5 +87,4 @@ W = "\033[37m"
 DEF = "\033[39m"
 GRAY = "\033[30m"
 SEQ = "\033[2K\r"
-SIL = --no-print-directory
 #------------------#

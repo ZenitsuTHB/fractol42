@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 19:30:16 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/11 21:05:13 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/12 20:00:22 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	julia_set(t_fract *fract, float x, float y)
     while (iteration < max_iteration) 
     {
         xtemp = zx * zx - zy * zy;
-        zy = -2 * zx * zy  + y / 300;
+        zy = 2 * zx * zy  + y / 300;
         zx = xtemp + x / 300;
 		if (zx * zx + zy * zy > 4)
 		{
