@@ -45,7 +45,7 @@
 #ifndef MLX_H
 
 #define	MLX_H
-
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 void	*mlx_init();
 /*

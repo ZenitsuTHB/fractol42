@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 19:53:24 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/12 18:46:47 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/14 13:02:30 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@
 
 typedef struct s_complex
 {
-	double	x;
-	double	y;
+	double	r;
+	double	i;
 }t_complex;
 
 typedef struct s_fract
 {
-	float	x;
-	float	y;
+	int	x;
+	int	y;
 	void	*mlx;
 	void	*img;
 	void	*wind;
@@ -54,13 +54,16 @@ typedef struct s_fract
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		max_iter;
+	double	zoom;
+	t_complex	z;
 }t_fract;
 
-
+void	julia_set(t_fract *f);
 void    printer(t_fract *data, int color);
-void    julia_set(t_fract *fract, float x, float y);
-void    burning_set(t_fract *fract);
-void    mandelbrot_set(t_fract *fract, float x, float y);
+int		draw_fractal(t_fract *fract);
+void    tricorn_set(t_fract *f);
+void    mandelbrot_set(t_fract *f);
 void	init_struct(t_fract *fract, char **av);
-
+//void   julia_set(t_fract *fract, float x, float y);
 #endif

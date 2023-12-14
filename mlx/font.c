@@ -1,5 +1,5 @@
 /* GIMP RGBA C-Source image dump (font.c) */
-
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 static const struct {
   unsigned int 	 width;
   unsigned int 	 height;
