@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 12:38:41 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/14 20:58:31 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/14 22:55:26 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@
  * f = fractal;
  */
 
-void	cleanning(t_fract *f)
+/*
+ *	check_arg function;TODO
+ */
+
+int	cleanning(t_fract *f)
 {
 	if (f && f->wind)
 		mlx_destroy_window(f->mlx, f->wind);
