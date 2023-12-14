@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 12:00:38 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/14 19:50:53 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/14 21:59:31 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,9 @@ int draw_fractal(t_fract *f)
 				 mandelbrot_set(f);
 			else if (!ft_strncmp("tricorn", f->name, 7))
 				tricorn_set(f);
-			if (iter != 0){
-			int grayscale_color = iter * 255 / f->max_iter;
-            int pixel_color = (grayscale_color << 8) | 
-				(grayscale_color << 24) | grayscale_color |
-				(grayscale_color << 26) | grayscale_color;
-			int pos = (f->x * 4) + (f->y * WIDTH * 4);
-            *(unsigned int*)(f->im_ad + pos) = pixel_color;}
+			else
+				input_set();	
+            psychedelic_effect(iter, f);
 			f->y++;
 		}
 		f->x++;
@@ -66,9 +62,10 @@ int	main(int ac, char **av)
 	
 	if (ac == 2 || (ac == 4 && !ft_strncmp(av[1], "julia", 5 )))
 	{
+		//check_argv();TODO
 		init_struct(&fract, av);
 		mlx_loop_hook(fract.mlx, &draw_fractal, &fract);
-	//	mlx_key_hook(fract.wind, key_hook, &fract);
+		mlx_key_hook(fract.wind, key_hook, &fract);
 	//	mlx_hook(fract.win, 17, 1L << 17, close_game, &fract);
 	//	mlx_mouse_hook(fract.wind, mouse_hook, &fract);
 		mlx_loop(fract.mlx);

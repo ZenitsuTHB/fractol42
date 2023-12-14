@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 19:53:24 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/14 20:12:11 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/14 21:33:48 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,10 @@ typedef struct s_fract
 	double	zoom;
 	t_complex	z;
 }t_fract;
-
+void	psychedelic_effect(int iter, t_fract *f);
 void	cleanning(t_fract *f);
 int	julia_set(t_fract *f);
+int	key_hook(int key, t_fract *f);
 void    tricorn_set(t_fract *f);
 void    mandelbrot_set(t_fract *f);
 int		draw_fractal(t_fract *fract);
