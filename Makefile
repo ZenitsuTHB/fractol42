@@ -6,7 +6,7 @@
 #    By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 17:44:46 by avolcy            #+#    #+#              #
-#    Updated: 2023/12/14 13:03:13 by avolcy           ###   ########.fr        #
+#    Updated: 2023/12/14 20:12:38 by avolcy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ OBJD = .temp/
 
 #========|_SCRS_|===========#
 SRC = $(SRCD)fractol.c $(SRCD)initializing.c $(SRCD)julia.c $(SRCD)mandelbrot.c \
-	  $(SRCD)tricorn.c
+	  $(SRCD)tricorn.c $(SRCD)hooks.c
+
 
 
 

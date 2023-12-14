@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 12:38:41 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/14 13:46:15 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/14 20:10:24 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 /*
  * f = fractal;
  */
+
+void	cleanning(t_fract *f)
+{
+	if (f && f->wind)
+		mlx_destroy_window(f->mlx, f->wind);
+	exit (1);
+}
 
 void	init_struct(t_fract *fract, char **av)
 {

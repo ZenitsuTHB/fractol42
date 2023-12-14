@@ -6,20 +6,20 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 19:30:16 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/14 13:46:04 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/14 19:58:53 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fractol.h"
 
- /*
+ /* This function Calculates iterations for the current pixel
   * z.r = x;
   * z.i = y;
   * c.r values && c.i are constant used 
   * in the julia set equation
   */
 
-void	julia_set(t_fract *f)
+int	julia_set(t_fract *f)
 {
 	t_complex	z;
 	t_complex	c;
@@ -40,13 +40,15 @@ void	julia_set(t_fract *f)
         z.i = y_tmp;
 		if ((z.r * z.r) + (z.i * z.i) > 4)
 		{
-			printer(f, iter * iter);
-			break ;
+			return iter;
+			//printer(f, iter * iter);
+			//break ;
 		}
 		iter++;
     }
-	if (iter == f->max_iter - 1)
-		printer(f, 0);
+	return (f->max_iter - 1);
+	//if (iter == f->max_iter - 1)
+	//	printer(f, 0);
 }
 /*int color = calcul_julia_set(fract);
  * Map the color based on iterations
