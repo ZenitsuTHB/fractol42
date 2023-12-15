@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 12:00:38 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/14 23:01:23 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/15 20:41:01 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,25 @@ void	input_set(void)
 
 int draw_fractal(t_fract *f)
 {
+	int	pos;
 	int iter;
-	f->x = 0;
-    while (f->x < WIDTH)
+	f->x = -1;
+    while (++(f->x) < WIDTH)
 	{
-		f->y = 0;
-        while (f->y < HEIGHT)
+		f->y = -1;
+        while (++(f->y) < HEIGHT)
 		{
-			//printer(fract, 32);
-			if (!ft_strncmp("julia", f->name, 5))
+			if (!ft_strncmp("julia", f->name, 6))
 				iter = julia_set(f);
-			else if (!ft_strncmp("mandelbrot", f->name, 10))
+			else if (!ft_strncmp("mandelbrot", f->name, 11))
 				iter = mandelbrot_set(f);
-			else if (!ft_strncmp("tricorn", f->name, 7))
+			else if (!ft_strncmp("tricorn", f->name, 8))
 				iter = tricorn_set(f);
 			else
 				input_set();	
-            psychedelic_effect(iter, f);
-			f->y++;
+			pos = (f->x * 4) + (f->y * WIDTH * 4);
+            psychedelic_effect(iter, f, pos);
 		}
-		f->x++;
 	}
 	mlx_put_image_to_window(f->mlx, f->wind, f->img, 0, 0);
 	return 0;
@@ -68,7 +67,7 @@ int	main(int ac, char **av)
 		mlx_loop_hook(fract.mlx, &draw_fractal, &fract);
 		mlx_key_hook(fract.wind, key_hook, &fract);
 		mlx_hook(fract.wind, 17, 1L << 17, cleanning, &fract);
-	//	mlx_mouse_hook(fract.wind, mouse_hook, &fract);
+		//mlx_mouse_hook(fract.wind, mouse_hook, &fract);
 		mlx_loop(fract.mlx);
 	}
 	else

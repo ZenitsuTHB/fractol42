@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 12:38:41 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/14 22:55:26 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/15 20:40:33 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ void	init_struct(t_fract *fract, char **av)
 {
 	fract->name = av[1];
 	fract->zoom = 1.0;
+//	if (!ft_strncmp(fract->name, "julia", 6) && ac == 4)
+//	{
+//		fract->jr = -0.7;
+//		fract->ji = 0.27015;
+//	}
 	fract->max_iter = 100;
 	fract->z.r = 1.5 * (fract->x - WIDTH / 2.0) / (0.5 * fract->zoom * WIDTH);
     fract->z.i = (fract->y - HEIGHT / 2.0) / (0.5 * fract->zoom * HEIGHT);

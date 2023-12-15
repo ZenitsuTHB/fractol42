@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:04:31 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/14 22:08:16 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/15 20:40:54 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,22 @@ int	key_hook(int key, t_fract *f)
 	return (0);
 }
 
-void	psychedelic_effect(int iter, t_fract *f)
+//int	mouse_hook(int key )
+void	psychedelic_effect(int iter, t_fract *f, int pos)
 {
-	int colorPalette[] = { 0x1f665F, 0x300066, 0x33CCCC }; // Red, Green, Blue
-    int maxColorIndex = sizeof(colorPalette) / sizeof(colorPalette[0]);
-	int pixelColor; 
-    int colorIndex = iter % maxColorIndex; // Cycling through colors
+	int pixel_col; 
+	int array_col[] = { 0x1f665F, 0x300066, 0x33CCCC };
+	int max_col_idx = sizeof(array_col) / sizeof(array_col[0]);
+    int col_idx = iter % max_col_idx;
 	int grayscale = iter * 255 / f->max_iter;
-        // Get color from palette based on the index
-     pixelColor = colorPalette[colorIndex] + (grayscale << 8) /*| grayscale*/ |
-		 (grayscale << 24) /*| grayscale*/ | (grayscale << 26) | grayscale;
-        // Set color for the pixel
-     int pos = (f->x * 4) + (f->y * WIDTH * 4);
-     *(unsigned int*)(f->im_ad + pos) = pixelColor;
-
-//	return (pixelColor);
+     
+	pixel_col = array_col[col_idx] + (grayscale << 8) |
+		 (grayscale << 24) | (grayscale << 26) | grayscale;
+     *(unsigned int*)(f->im_ad + pos) = pixel_col;
 }
-
+/*
+ *  Cycling through colors, [col_idx];
+ *  Get color from palette based on the index, [pixel_col];
+ *  Grayscale is a way of representing images or colors using shades of gray
+ *  Set color for the pixel,[pos];
+ */
