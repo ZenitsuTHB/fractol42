@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:43:46 by avolcy            #+#    #+#             */
-/*   Updated: 2023/11/07 17:52:11 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/16 19:19:54 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ char		*ft_strtrim(char const *s1, char const *set);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+double		ft_atod(const char *str, double res, double doub, int i);
 
 int			ft_lstsize(t_list *lst);
 t_list		*ft_lstlast(t_list *lst);

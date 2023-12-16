@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 19:30:16 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/15 20:40:36 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/16 19:55:47 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@
 int	julia_set(t_fract *f)
 {
 	t_complex	z;
-	t_complex	c;
+//	t_complex	c;
 	int iter;
 	double	x_tmp;
 	double	y_tmp;
 	
-	c.r = -0.7;
-	c.i = 0.27015; //M_PI;
+//	c.r = -0.7;
+//	c.i = 0.27015; //M_PI;
 	z.r = 1.5 * (f->x - WIDTH / 2.0) / (0.5 * f->zoom * WIDTH);
 	z.i = (f->y - HEIGHT / 2.0) / (0.5 * f->zoom * HEIGHT);//M_LOG2E;
     iter = 0;
     while (iter < f->max_iter) 
     {
-        x_tmp = (z.r * z.r) - (z.i * z.i) + c.r;
-        y_tmp = 2 * (z.r * z.i)  + c.i;
+        x_tmp = (z.r * z.r) - (z.i * z.i) + f->c.r;
+        y_tmp = 2 * (z.r * z.i)  + f->c.i;
         z.r = x_tmp;
         z.i = y_tmp;
 		if ((z.r * z.r) + (z.i * z.i) > 4)
