@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 12:38:41 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/16 19:55:45 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/17 21:06:12 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	init_struct(t_fract *fract, char **av, int ac)
 	{
 		if (ac == 4)
 		{
-			fract->c.r = ft_atod(av[2], 1.0, 0.1, 0);
-			fract->c.i = ft_atod(av[3], 1.0, 0.1, 0);
+			fract->c.r = ft_atod(av[2], 0, 0.1, 0);
+			fract->c.i = ft_atod(av[3], 0, 0.1, 0);
 			printf("f->c.r %lf\n", fract->c.r);
 			printf("f->c.i %lf\n", fract->c.i);
 			printf("av2 %s\n", av[2]);

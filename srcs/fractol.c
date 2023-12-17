@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 12:00:38 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/16 19:55:59 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/17 21:14:36 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	main(int ac, char **av)
 		mlx_loop_hook(fract.mlx, &draw_fractal, &fract);
 		mlx_key_hook(fract.wind, key_hook, &fract);
 		mlx_hook(fract.wind, 17, 1L << 17, cleanning, &fract);
-		//mlx_mouse_hook(fract.wind, mouse_hook, &fract);
+		mlx_mouse_hook(fract.wind, mouse_hook, &fract);
 		mlx_loop(fract.mlx);
 	}
 	else
