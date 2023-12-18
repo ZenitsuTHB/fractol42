@@ -6,13 +6,13 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 16:39:23 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/16 19:55:17 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/18 18:53:56 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int is_space(char c)
+int	is_space(char c)
 {
 	return (c == 32 || (c >= 9 && c <= 13));
 }

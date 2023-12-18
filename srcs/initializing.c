@@ -6,15 +6,11 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 12:38:41 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/17 21:06:12 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/18 18:52:10 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fractol.h"
-
-/*
- * f = fractal;
- */
 
 /*
  *	check_arg function;TODO
@@ -27,37 +23,25 @@ int	cleanning(t_fract *f)
 	exit (1);
 }
 
-void	init_struct(t_fract *fract, char **av, int ac)
+void	init_struct(t_fract *f, char **av, int ac)
 {
-	fract->name = av[1];
-	fract->zoom = 1.0;
-	if (!ft_strncmp(fract->name, "julia", 6))
+	f->zoom = 1;
+	f->name = av[1];
+	f->max_iter = 100;
+	if (!ft_strncmp(f->name, "julia", 6) && ac == 4)
 	{
-		if (ac == 4)
-		{
-			fract->c.r = ft_atod(av[2], 0, 0.1, 0);
-			fract->c.i = ft_atod(av[3], 0, 0.1, 0);
-			printf("f->c.r %lf\n", fract->c.r);
-			printf("f->c.i %lf\n", fract->c.i);
-			printf("av2 %s\n", av[2]);
-			printf("av3 %s\n", av[3]);
-		}	
-		else
-		{
-			fract->c.r = -0.7;
-			fract->c.i = 0.27015;
-		}
+		f->c.r = ft_atod(av[2], 0, 0.1, 0);
+		f->c.i = ft_atod(av[3], 0, 0.1, 0);
 	}
-	fract->max_iter = 100;
-	fract->mlx = mlx_init();
-	//if (fract->mlx == NULL)
-		//cleanning();//TODO;
-	fract->wind = mlx_new_window(fract->mlx, WIDTH, HEIGHT, fract->name);
-	//if (fract->mlx == NULL)
-	//	mlx = mlx_destroy_image
-	fract->img = mlx_new_image(fract->mlx, WIDTH, HEIGHT);
-	fract->im_ad = mlx_get_data_addr(fract->img, &fract->bits_per_pixel,
-		   	&fract->line_length, &fract->endian);
+	f->c.r = -0.7;
+	f->c.i = 0.27015;
+	f->z.r = 1.5 * (f->x - WIDTH / 2.0) / (0.5 * f->zoom * WIDTH);
+	f->z.i = (f->y - HEIGHT / 2.0) / (0.5 * f->zoom * HEIGHT);
+	f->mlx = mlx_init();
+	if (f->mlx == NULL)
+		cleanning(f);
+	f->wind = mlx_new_window(f->mlx, WIDTH, HEIGHT, f->name);
+	f->img = mlx_new_image(f->mlx, WIDTH, HEIGHT);
+	f->im_ad = mlx_get_data_addr(f->img, &f->bits_per_pixel,
+			&f->line_length, &f->endian);
 }
-
-
