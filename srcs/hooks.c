@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:04:31 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/17 21:53:18 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/18 14:32:06 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,22 @@ int	mouse_hook(int key, int x, int y, t_fract *f)
 	return (0);
 }
 
+static	int pixie(int ar_col, int col_idx, int gray_sc, int flag)
+{
+	int pixel_col;
+
+	if (flag == 1)
+		pixel_col = ar_col[col_idx] + (gray_sc << 8)
+			| (gray_sc << 24) | (gray_sc << 26) | gray_sc;
+	if (flag == 2)
+		pixel_col = ar_col[col_idx] + (gray_sc << 24)
+			| (gray_sc << 8) | (gray_sc << 30) | gray_sc;
+	if (flag == 3)
+		pixel_col = ar_col[col_idx] + (gray_sc << 24)
+			| (grayscale << 8) | (gray_sc << 30) | gray_sc;
+	return (pixel_col);
+}
+
 void	psychedelic_effect(int iter, t_fract *f, int pos)
 {
 	int	pixel_col;
@@ -47,18 +63,11 @@ void	psychedelic_effect(int iter, t_fract *f, int pos)
 	col_idx = iter % max_col_idx;
 	grayscale = iter * 255 / f->max_iter;
 	if (!ft_strncmp(f->name, "julia", 6))
-	{
-		pixel_col = array_col[col_idx] + (grayscale << 8)
-			| (grayscale << 24) | (grayscale << 26) | grayscale;
-	}
+		pixel_col = pixie(array_col, col_idx, grayscale, 1);
 	else if (!ft_strncmp(f->name, "mandelbrot", 11))
-	{
-		pixel_col = array_col[col_idx] + (grayscale << 24)
-			| (grayscale << 20) | (grayscale << 16) | grayscale;
-	}
-	else
-		pixel_col = array_col[col_idx] + (grayscale << 24)
-			| (grayscale << 8) | (grayscale << 30) | grayscale;
+		pixel_col = pixie(array_col, col_idx, grayscale, 2);
+	else if (!ft_strncmp(f->name, "tricorn", 11))
+		pixel_col = pixie(array_col, col_idx, grayscale, 3);
 	*(unsigned int *)(f->im_ad + pos) = pixel_col;
 }
 /*

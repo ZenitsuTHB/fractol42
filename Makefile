@@ -6,7 +6,7 @@
 #    By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 17:44:46 by avolcy            #+#    #+#              #
-#    Updated: 2023/12/14 20:12:38 by avolcy           ###   ########.fr        #
+#    Updated: 2023/12/18 14:12:39 by avolcy           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,9 +33,6 @@ OBJD = .temp/
 SRC = $(SRCD)fractol.c $(SRCD)initializing.c $(SRCD)julia.c $(SRCD)mandelbrot.c \
 	  $(SRCD)tricorn.c $(SRCD)hooks.c
 
-
-
-
 OBJ = $(addprefix $(OBJD), $(SRC:$(SRCD)%.c=%.o))
 
 #=======|_TARGETS_|======#
@@ -46,40 +43,39 @@ all : $(EXEC)
 	@mkdir -p .temp
 #________________________#
 $(LIBFT):
-	@$(MAKE) -C $(LIBDIR) --no-print-directory
+	@$(MAKE) -s -C $(LIBDIR) --no-print-directory
 	@$(MSG_LIB) 
 
 $(MLX) :
 	@$(MAKE) -s -C $(MLXDIR) --no-print-directory
-	@$(MSG_MLX) 
 #-----------------------------#
 
 $(OBJD)%.o: $(SRCD)%.c $(INC) | .temp #$(SRC) 
 	@$(CC) $(FLAG) -c -o $@ $<
-	#@printf "\r\033[KCompiling $<..."
-	@$(MSG_FRAC)
+
 #========================================#
 $(EXEC) : $(NAME) $(LIBFT) $(MLX) 
 	@$(CC) $(MLXFLAG) $^ -o $@
 	@$(MSG_EXE)
 
-$(NAME) : $(OBJ) $(INC) Makefile  
-	$(BUILT_LIB) $@ $^
+$(NAME) : $(OBJ) $(INC) $(MLX) Makefile  
+	@$(BUILT_LIB) $@ $^
 #----------------------------------------#
 
-.PHONY: all clean fclean re
+.PHONY: all clean clean1 fclean re
 
-#==========|_CLEAN_UP_|========#
-clean :
-	@$(MAKE) -s clean -C $(LIBDIR) --no-print-directory
-	@$(MAKE) -s clean -C $(MLXDIR) --no-print-directory
+#==========|_CLEAN_UP_|========#	
+clean : 
 	@$(RM) $(OBJD)
+	@$(MAKE) clean -C $(LIBDIR) --no-print-directory
+	@$(MAKE) clean -C $(MLXDIR) --no-print-directory
 	@$(MSG_CLEAN) 
 
 fclean : clean 
 	@$(RM) $(OBJD) 
 	@$(RM) $(EXEC) $(NAME) 
 	@$(MAKE) fclean -C $(LIBDIR) --no-print-directory
+	@$(MAKE) fclean -C $(MLXDIR) --no-print-directory
 	@$(MSG_FCLEAN) 
 
 re : fclean all
@@ -99,11 +95,7 @@ SEQ = \033[2Kr
 
 
 #---|_MESSAGES_|---#
-
-MSG_FRAC = @echo "$(G)EXECUTABLE CREATED SUCCESSFULLY !$(DEF)"
 MSG_LIB = @echo "$(G)LIBFT COMPILED SUCCESSFULLY !$(DEF)"
-MSG_MLX = @echo "$(G)MLX COMPILED SUCCESSFULLY !$(DEF)"
 MSG_EXE = @echo "$(G)EXECUTABLE CREATED SUCCESSFULLY !$(DEF)"
 MSG_CLEAN = @echo "$(R)ALL OBECTS DELETED SUCCESSFULLY !$(DEF)"
 MSG_FCLEAN = @echo "$(M)ALL LIBRARIES AND EXECUTABLES DELETED SUCCESSFULLY !$(DEF)"
-

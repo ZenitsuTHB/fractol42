@@ -1,31 +1,54 @@
 #
-#
-RM = rm -f
-CRLIB = ar -r
-RNLIB = ranlib
-NOM =libmlx.a
-SRC = mlx_shaders.c mlx_new_window.m mlx_init_loop.m \
-	 mlx_new_image.m mlx_xpm.c mlx_int_str_to_wordtab.c
-SRC+= mlx_png.c mlx_mouse.m
-OBJ1=$(SRC:.c=.o)
-OBJ=$(OBJ1:.m=.o)
-CFLAGS+=-O2
+#<---COLORS--->#
+GREEN = \033[1;92m
+RED = \033[1;91m
+NC = \033[0m
+YELLOW=\033[1;33m
 
-# add to match string put with X11 in size and position
-CFLAGS+= -DSTRINGPUTX11
+#<---NAME--->#
+NAME = libmlx.a
 
-# personal to silence warnings arch.
-# Define GL_SILENCE_DEPRECATION to silence OpenGL deprecation warnings
-CFLAGS+= -DGL_SILENCE_DEPRECATION
+#<---SRC && OTHERS--->#
+OBJ_DIR	= ./obj/
 
-all: $(NOM)
+SRC_C = mlx_shaders.c mlx_xpm.c mlx_int_str_to_wordtab.c
+SRC_M = mlx_new_image.m mlx_new_window.m mlx_init_loop.m
 
-$(NOM):	$(OBJ)
-	@$(CRLIB) $(NOM) $(OBJ)
-	@$(RNLIB) $(NOM)
+OBJ_C = $(addprefix $(OBJ_DIR)src_c/, $(SRC_C:%.c=%.o)) #$(SRC_C:%.c=%.o) 
+OBJ_M = $(addprefix $(OBJ_DIR)src_m/, $(SRC_M:%.m=%.o)) #$(SRC_M:%.m=%.o) 
 
-clean:
-	@$(RM) $(NOM) $(OBJ) *~
-	@$(RM) mlx_app
+CFLAGS+= -O2 -Wno-deprecated-declarations -DSTRINGPUTX11
 
-re: clean all
+MDP	= mkdir -p
+
+#<---RULES--->#
+$(OBJ_DIR)src_c/%.o: %.c Makefile
+	@$(MDP) $(dir $@)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)src_m/%.o: %.m Makefile
+	@$(MDP) $(dir $@)
+	@$(CC) -MT $@ $(CFLAGS) -MMD -MP -c $< -o $@
+
+all		:	 $(NAME)
+
+$(NAME)::	$(OBJ_C) $(OBJ_M)
+	@ar -crs $@ $(OBJ_C) $(OBJ_M)
+	@echo "$(GREEN)MLX COMPILED SUCCESSFULLY !$(NC)"
+	@#ranlib $@
+
+$(NAME)::
+	@echo -n
+
+clean	:
+	@rm -rf $(OBJ_DIR) *~
+	@rm -f mlx_app
+	@echo "$(RED)MLX OBJS DELETED$(NC)"
+
+fclean	: clean
+	@$(RM) $(NAME)
+	@echo "$(RED)MLX EXEC DELETED$(NC)"
+
+re: fclean all
+
+.PHONY:	all clean fclean re
