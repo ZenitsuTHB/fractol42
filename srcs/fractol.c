@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 12:00:38 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/18 19:06:34 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/19 14:57:13 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,12 @@ int	draw_fractal(t_fract *f)
 		f->y = -1;
 		while (++(f->y) < HEIGHT)
 		{
-			if (!ft_strncmp("julia", f->name, 6))
+			if (!ft_strncmp("julia", f->name, 5))
 				iter = julia_set(f);
-			else if (!ft_strncmp("mandelbrot", f->name, 11))
+			else if (!ft_strncmp("mandelbrot", f->name, 10))
 				iter = mandelbrot_set(f);
-			else if (!ft_strncmp("tricorn", f->name, 8))
+			else if (!ft_strncmp("tricorn", f->name, 7))
 				iter = tricorn_set(f);
-			else
-				input_set();
 			pos = (f->x * 4) + (f->y * WIDTH * 4);
 			psychedelic_effect(iter, f, pos);
 		}
@@ -64,7 +62,8 @@ int	main(int ac, char **av)
 {
 	t_fract	fract;
 
-	if (ac == 2 || (ac == 4 && !ft_strncmp(av[1], "julia", 5)))
+	printf("test %d\n", check_args(ac, av));
+	if (check_args(ac, av) == 1)
 	{
 		init_struct(&fract, av, ac);
 		mlx_loop_hook(fract.mlx, &draw_fractal, &fract);

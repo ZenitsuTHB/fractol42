@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 19:53:24 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/18 19:07:36 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/19 14:49:27 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 
 # define WRONG_SET "\nIncomplete set ! try one of these combs :"
 # define JULIA "\t./fractol julia"
-# define CORRECT_SET "\t./fractol mandelbrot\n\t./fractol burningship"
+# define CORRECT_SET "\t./fractol mandelbrot\n\t./fractol tricorn"
 # define JULIA_SET "\tWithin julia try some combs from [-2.0 to 2.0]"
 
 typedef struct s_complex
@@ -70,6 +70,7 @@ int		mandelbrot_set(t_fract *f);
 int		draw_fractal(t_fract *fract);
 int		key_hook(int key, t_fract *f);
 int		mouse_hook(int key, int x, int y, t_fract *f);
+int		check_args(int ac, char **av);
 void	printer(t_fract *data, int color);
 void	init_struct(t_fract *fract, char **av, int ac);
 void	psychedelic_effect(int iter, t_fract *f, int pos);
