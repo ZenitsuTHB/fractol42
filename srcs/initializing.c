@@ -6,15 +6,11 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 12:38:41 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/19 14:57:07 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/19 19:21:24 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fractol.h"
-
-/*
- *	check_arg function;TODO
- */
 
 int	cleanning(t_fract *f)
 {
@@ -47,30 +43,44 @@ void	init_struct(t_fract *f, char **av, int ac)
 			&f->line_length, &f->endian);
 }
 
-static	int	check_avector(char **av, int i)
+static	int	flag_adjust(char *s)
 {
 	size_t	j;
+	int		flag;
+
+	j = 0;
+	flag = 0;
+	if ((s[j] == '-' || s[j] == '+') && s[j + 1])
+		j++;
+	while (j < ft_strlen(s))
+	{
+		if (!ft_isdigit(s[j]))
+		{
+			if (s[j] == '.' && flag == 0 && ft_isdigit(s[j + 1]))
+			{
+				flag = 1;
+				j++;
+			}
+			else
+				return (0);
+		}
+		j++;
+	}
+	return (1);
+}
+
+static	int	check_avector(char **av, int i)
+{
 	char	*s;
 	double	num;
 
-	while (av[i])
+	while (i < 4)
 	{
-		j = 0;
 		s = av[i];
 		if (ft_strlen(av[i]) == 0)
 			return (0);
-		if ((s[j] == '-' || s[j] == '+') && s[j + 1])
-			j++;
-		while (j < ft_strlen(s))
-		{
-			if (!ft_isdigit(s[j]))
-			{
-				if (s[j] != '.')
-					return (0);
-			}
-			printf("here\n");
-			j++;
-		}
+		if (flag_adjust(s) == 0)
+			return (0);
 		num = ft_atod(av[i], 0, 0.1, 0);
 		if (num < -2 || num > 2)
 			return (0);
@@ -85,7 +95,7 @@ int	check_args(int ac, char **av)
 		return (1);
 	else if (!ft_strncmp("julia", av[1], 6) && ac == 4)
 	{
-		if (check_avector(av, 1) == 1)
+		if (check_avector(av, 2) == 1)
 			return (1);
 		return (0);
 	}

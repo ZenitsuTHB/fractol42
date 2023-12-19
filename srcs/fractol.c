@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 12:00:38 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/19 14:57:13 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/19 19:57:13 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,10 @@ int	draw_fractal(t_fract *f)
 	return (0);
 }
 
-/* check_argv();TODO
- * if check_argv == 1; good args else input_set;
- */
 int	main(int ac, char **av)
 {
 	t_fract	fract;
 
-	printf("test %d\n", check_args(ac, av));
 	if (check_args(ac, av) == 1)
 	{
 		init_struct(&fract, av, ac);

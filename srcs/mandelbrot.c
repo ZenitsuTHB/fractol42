@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 18:32:23 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/18 18:38:53 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/19 19:19:16 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	mandelbrot_set(t_fract *f)
 
 	f->zx = 0;
 	f->zy = 0;
-	zr = 1.6 * (f->x - WIDTH / 2.0) / (0.5 * f->zoom * WIDTH);
+	zr = 1.68 * (f->x - WIDTH / 1.9) / (0.5 * f->zoom * WIDTH);
 	zi = (f->y - HEIGHT / 2.0) / (0.3 * f->zoom * HEIGHT);
 	iteration = 0;
 	while (iteration < f->max_iter)

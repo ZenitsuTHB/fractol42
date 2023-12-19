@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 19:53:24 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/19 14:49:27 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/19 19:45:59 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,20 @@
 # define ARROW_DOWN 125
 # define ARROW_RIGHT 124
 
-# define WRONG_SET "\nIncomplete set ! try one of these combs :"
+# define R "\033[31m"
+# define G "\033[32m"
+# define Y "\033[33m"
+# define B "\033[34m"
+# define M "\033[35m"
+# define C "\033[36m"
+# define W "\033[37m"
+# define DEF "\033[39m"
+# define GRAY "\033[30m"
+
+# define WRONG_SET "\nIncomplete, or it might be WRONG ! try one of these :"
 # define JULIA "\t./fractol julia"
 # define CORRECT_SET "\t./fractol mandelbrot\n\t./fractol tricorn"
-# define JULIA_SET "\tWithin julia try some combs from [-2.0 to 2.0]"
+# define JULIA_SET "\tWithin julia try from [-2.0 to 2.0]\n"
 
 typedef struct s_complex
 {
