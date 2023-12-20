@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 16:04:31 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/19 20:07:23 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/20 19:18:26 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ void	psychedelic_effect(int iter, t_fract *f, int pos)
 	arr_col[0] = 0x9944FF;
 	arr_col[1] = 0x301166;
 	arr_col[2] = 0x03AACC;
-	max_col_idx = sizeof(arr_col) / sizeof(arr_col[1]);
+	max_col_idx = sizeof(arr_col) / sizeof(arr_col[2]);
 	col_idx = iter % max_col_idx;
-	gray_sc = (iter + iter) * 250 / f->max_iter;
+	gray_sc = (iter) * 250 / f->max_iter;
 	if (!ft_strncmp(f->name, "julia", 6))
 		pixel_col = arr_col[col_idx] + (gray_sc << 8)
 			| (gray_sc << 24) | (gray_sc << 26) | gray_sc;
 	else if (!ft_strncmp(f->name, "mandelbrot", 11))
-		pixel_col = arr_col[col_idx] + (gray_sc << 8)
+		pixel_col = arr_col[col_idx] + (gray_sc << 12)
 			| (gray_sc << 26) | (gray_sc << 30) | gray_sc;
 	else
 		pixel_col = arr_col[col_idx] + (gray_sc << 24)

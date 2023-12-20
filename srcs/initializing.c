@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 12:38:41 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/19 19:21:24 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/20 19:24:04 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,9 @@ static	int	check_avector(char **av, int i)
 
 int	check_args(int ac, char **av)
 {
-	if (!ft_strncmp("julia", av[1], 6) && ac == 2)
+	if (ac == 1)
+		return (0);
+	else if (!ft_strncmp("julia", av[1], 6) && ac == 2)
 		return (1);
 	else if (!ft_strncmp("julia", av[1], 6) && ac == 4)
 	{

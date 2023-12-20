@@ -6,7 +6,7 @@
 /*   By: avolcy <avolcy@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 19:53:24 by avolcy            #+#    #+#             */
-/*   Updated: 2023/12/19 19:45:59 by avolcy           ###   ########.fr       */
+/*   Updated: 2023/12/20 15:02:16 by avolcy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define DEF "\033[39m"
 # define GRAY "\033[30m"
 
-# define WRONG_SET "\nIncomplete, or it might be WRONG ! try one of these :"
+# define WRONG_SET "\nIncomplete, or set might be WRONG ! try one of these :"
 # define JULIA "\t./fractol julia"
 # define CORRECT_SET "\t./fractol mandelbrot\n\t./fractol tricorn"
 # define JULIA_SET "\tWithin julia try from [-2.0 to 2.0]\n"
